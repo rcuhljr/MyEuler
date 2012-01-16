@@ -21,7 +21,8 @@ def checkNeighbors(x, y, grid):
             return 0
         if(ystep < 0 and y-3 < 0):
             return 0        
-        return int(grid[y][x])*int(grid[y+ystep][x+xstep])*int(grid[y+ystep*2][x+xstep*2])*int(grid[y+ystep*3][x+xstep*3])
+        return reduce(lambda a, b: a*b, 
+            map(lambda a,b: int(grid[y+ystep*b][x+xstep*a]), range(4), range(4)))
     return max(map(checkdir, xvals, yvals))
     
 def loadGrid(file):
