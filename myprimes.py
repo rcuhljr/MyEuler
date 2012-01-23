@@ -35,7 +35,26 @@ class Primes:
                 return 
             elif n > cutoff:
                 break
-        self.primes.append(x)        
+        self.primes.append(x)  
+
+    def is_prime(self, n): 
+        if n < 0 or n%2 == 0:
+            return False
+        count = self.primes[len(self.primes)-1]
+        while self.primes[-1] < n:
+            count += 2        
+            self.pump_prime(count)                   
+        bottom, top = 0, len(self.primes)-1
+        while True:        
+            if self.primes[bottom] == n or self.primes[top] == n:
+                return True
+            elif bottom+1 >= top:
+                return False
+            mid = self.primes[(bottom+top)/2]
+            if mid <= n:
+                bottom = (bottom+top)/2
+            else:
+                top = (bottom+top)/2
         
     def proper_divisors(self, number):
         if self.divisors.has_key(number):
