@@ -1,5 +1,6 @@
 import math
 import cProfile
+import myprimes
 primes = [2]
 
 def fillPrimesFor(x):
@@ -22,7 +23,20 @@ def solve(x):
             biggestFactor = n
     print biggestFactor    
 
-
+def solve2(x):
+    primes = myprimes.Primes()
+    biggestFactor = 0
+    counter = 1
+    n = primes.prime(counter)
+    while n <= x:    
+        if x%n == 0:
+            biggestFactor = n
+            x = x/n
+        counter += 1
+        n =primes.prime(counter)
+    print biggestFactor    
+    
+print cProfile.run('solve2(600851475143)')
 print cProfile.run('solve(600851475143)')
 
 #going to attempt to speed this up with a better prime seive.
